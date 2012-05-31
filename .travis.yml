@@ -7,6 +7,8 @@ before_script:
   - sleep 5
   - firefox http://localhost:1111/capture &
   - sleep 5
+  - phantomjs http://localhost:1111/capture &
+  - sleep 5
 
 
 script:
