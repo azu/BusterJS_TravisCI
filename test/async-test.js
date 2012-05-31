@@ -6,8 +6,3 @@ buster.testCase("Async Test", {
         }, 100);
     }
 });
-buster.testCase("Src Test", {
-    "should be HELLO" : function(){
-        assert(hello(), "HELLO");
-    }
-})
