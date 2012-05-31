@@ -5,6 +5,6 @@
  */
 buster.testCase("Src Test", {
     "should be HELLO" : function(){
-        assert(hello(), "HELLO");
+        assert(hello(), "失敗");
     }
 })
