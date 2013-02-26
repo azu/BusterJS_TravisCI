@@ -1,3 +1,6 @@
+env:
+  global:
+    - PATH=$PATH:/tmp/bin
 before_install:
   # Install Google Chrome
   - "wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
