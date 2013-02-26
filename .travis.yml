@@ -1,14 +1,16 @@
+before_install:
+  - ./.travis/scripts/install_chrome.sh
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - sleep 5
+  - sleep 3
   - node_modules/.bin/buster-server &
-  - sleep 5
+  - sleep 3
   - firefox http://localhost:1111/capture &
-  - sleep 5
+  - sleep 3
   - phantomjs node_modules/buster/script/phantom.js http://localhost:1111/capture &
-  - sleep 4
-
+  - sleep 3
+  - google-chrome --no-default-browser-check --no-first-run --disable-default-apps http://localhost:1111/capture &
 
 script:
   - "npm test"
