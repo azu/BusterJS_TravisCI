@@ -1,16 +1,12 @@
 env:
   global:
     - PATH=$PATH:/tmp/bin
-  matrix:
-    - BROWSER=firefox
-    - BROWSER=chrome
 install:
   # Install Google Chrome
-  - "sudo apt-get install libcurl3 libnspr4-0d"
-  - "wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
-  - "sudo apt-get install libgconf2-4"
-  - "sudo dpkg -i ./google-chrome*.deb"
-  - "sudo apt-get -f install" # reported dependency issue?
+  - "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -"
+  - "sudo /bin/sh -c 'echo \"deb http://dl.google.com/linux/chrome/deb/ stable main\" >> /etc/apt/sources.list.d/google.list'"
+  - "sudo apt-get update"
+  - "sudo apt-get install google-chrome-stable"
 before_script:
   # Setup headless X per http://about.travis-ci.org/docs/user/gui-and-headless-browsers/
   - "export DISPLAY=:99.0"
