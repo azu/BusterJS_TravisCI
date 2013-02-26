@@ -7,3 +7,4 @@ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /et
 sudo apt-get update --force-yes
 sudo apt-get install -qq --force-yes xvfb imagemagick google-chrome-stable
 sudo apt-get install gconf2 # for firefox
+sudo chcon -t usr_t /opt/google/chrome/chrome-sandbox

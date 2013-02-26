@@ -1,8 +1,13 @@
 before_install:
-  - ./.travis/scripts/install_chrome.sh
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  # Install Google Chrome
+  - "wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
+  - "sudo apt-get install libgconf2-4"
+  - "sudo dpkg -i google-chrome*.deb"
+  - "sudo apt-get -f install" # reported dependency issue?
 before_script:
+  # Setup headless X per http://about.travis-ci.org/docs/user/gui-and-headless-browsers/
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
   - sleep 3
   - node_modules/.bin/buster-server &
   - sleep 3
@@ -10,7 +15,7 @@ before_script:
   - sleep 3
   - phantomjs node_modules/buster/script/phantom.js http://localhost:1111/capture &
   - sleep 3
-  - google-chrome --no-sandbox --no-default-browser-check --no-first-run --disable-default-apps http://localhost:1111/capture &
+  - google-chrome --no-default-browser-check --no-first-run --disable-default-apps http://localhost:1111/capture &
 
 script:
   - "npm test"
