@@ -4,7 +4,7 @@
     "description" : "Buster.JS with Travis CI example",
     "version" : "0.0.1",
     "scripts" : {
-        "test" : "node_modules/.bin/buster-test"
+        "test" : "node_modules/.bin/buster-test -r specification"
     },
     "dependencies" : {
         "buster" : "~0.6"
