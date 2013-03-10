@@ -1,5 +1,9 @@
 before_install:
   - sudo apt-get install gconf2 # for firefox
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+  - sudo apt-get update --force-yes
+  - sudo apt-get install google-chrome-stable --force-yes
 before_script:
   # Setup headless X per http://about.travis-ci.org/docs/user/gui-and-headless-browsers/
   - "export DISPLAY=:99.0"
@@ -11,6 +15,8 @@ before_script:
   - sleep 3
   - phantomjs node_modules/buster/script/phantom.js http://localhost:1111/capture &
   - sleep 3
+  - google-chrome http://localhost:1111/capture &
+  - sleep 5
 
 script:
   - "npm test"
