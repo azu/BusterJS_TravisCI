@@ -1,38 +1,17 @@
----
 before_install:
 - sudo apt-get install gconf2
-- wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key
-  add -
-- sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-- sudo apt-get update --force-yes
-- sudo apt-get install google-chrome-stable --force-yes
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- sleep 3
+- sleep 5
 - node_modules/.bin/buster-server &
-- sleep 3
+- sleep 5
 - firefox http://localhost:1111/capture &
-- sleep 3
+- sleep 5
 - phantomjs node_modules/buster/script/phantom.js http://localhost:1111/capture &
-- sleep 3
-- google-chrome --no-default-browser-check --no-first-run --disable-default-apps http://localhost:1111/capture
-  &
 - sleep 5
 script:
 - npm test
 language: node_js
 node_js:
 - 0.8
-env:
-  global:
-  - secure: ! 'MEXX8/CglhU/NBB0dmFkXrbG5mJiIoZIxEqERcs3atUSt7S54VXlxgockDQe
-
-      asowuF1F1NAii6qy2iraNYNQq7NtBQJsXKE8A+TPFNSwBCAeif9TcoxpJYJr
-
-      SJftCMCB2HcQTEsI+JcHzTAyEYR4ABb+KhXHRhcfbFCiyo9PIhU='
-  - secure: ! 'rPP3dQO4DZfHdFDvRAJaP5mPuqyivRe419fDwPzk2qk5liFad7m8AAj71wrT
-
-      wF8/iqz4TFCvnLXIG72Ije+Vn+Osa6EWYLrDm+pWwCRHuMCxHQ2H3xr3zPMh
-
-      VrvHvpLjThTPHRVeB3tq2HBCg5YnftjBmejYSdK3XmUjpL4+Z/c='
