@@ -1,4 +1,5 @@
 before_install:
+- sh .travis/scripts/install_chrome.sh
 - sudo apt-get install gconf2
 before_script:
 - export DISPLAY=:99.0
@@ -7,6 +8,8 @@ before_script:
 - node_modules/.bin/buster-server &
 - sleep 5
 - firefox http://localhost:1111/capture &
+- sleep 5
+- google-chrome --no-default-browser-check --no-first-run --disable-default-apps --no-sandbox http://localhost:1111/capture &
 - sleep 5
 - phantomjs node_modules/buster/script/phantom.js http://localhost:1111/capture &
 - sleep 5
